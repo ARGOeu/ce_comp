@@ -1,7 +1,7 @@
 import json
-from comparison_script import date_format
-from comparison_script import generate_Endpoints
-from comparison_script import endpoint_comparison
+from ce_comp import date_format
+from ce_comp import generate_Endpoints
+from ce_comp import endpoint_comparison
 
 test_str = """
 
