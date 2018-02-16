@@ -243,11 +243,11 @@ def main(args=None):
 
         print("\nAvailability Difference\n")
         for point in sorted(thresholded_points_by_da, key=thresholded_points_by_da.get, reverse=True):
-            cprint(colored(point + " - " + str(thresholded_points_by_da[point])+" "),"cyan",attrs=['bold'])
+            cprint(colored(point + " - " + str(thresholded_points_by_da[point])+" "), "cyan", attrs=['bold'])
 
         print("\nReliability Difference\n")
         for point in sorted(thresholded_points_by_dr, key=thresholded_points_by_dr.get, reverse=True):
-            cprint(colored(point + " - " + str(thresholded_points_by_dr[point])+" "),"yellow" ,attrs=['bold'])
+            cprint(colored(point + " - " + str(thresholded_points_by_dr[point])+" "), "yellow", attrs=['bold'])
 
 
 if __name__ == '__main__':
