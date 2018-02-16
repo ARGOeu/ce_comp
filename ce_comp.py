@@ -101,10 +101,7 @@ def main(args=None):
     config = ConfigParser.ConfigParser()
     config.read(config_path)
 
-    if args.OutputFormat is None:
-        output_format = "json"
-    else:
-        output_format = args.OutputFormat
+    output_format = args.OutputFormat
 
     if args.SavePath is None:
         save_path = config.get("SaveLocation", "path")
@@ -266,11 +263,11 @@ if __name__ == '__main__':
     
     parser = argparse.ArgumentParser(description="Comparing AR results between hadoop and flink infrastructure")
     parser.add_argument(
-        "-s", "--OutputFormat", type=str, help="Report's output format, default is json")
+        "-s", "--OutputFormat", type=str, default="json", help="Report's output format, default is json")
     parser.add_argument(
-        "-c", "--ConfigPath", type=str, help="Path for the config file")
+        "-c", "--ConfigPath", type=str, help="Path for the config file", required = True)
     parser.add_argument(
-        "-t", "--Tenant", type=str, help="Name of the tenant")
+        "-t", "--Tenant", type=str, help="Name of the tenant", required = True)
     parser.add_argument(
         "-th", "--Threshold", type=float, help="Threshold")
     parser.add_argument(
