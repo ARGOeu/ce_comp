@@ -279,7 +279,7 @@ if __name__ == '__main__':
     parser.add_argument(
         "-t", "--Tenant", type=str, help="Name of the tenant", required = True)
     parser.add_argument(
-        "-th", "--Threshold", type=float, help="Threshold")
+        "-th", "--Threshold", type=float, default = 1.0, help="Threshold")
     parser.add_argument(
         "-sp", "--SavePath", type=str, help="Save path for the generated report. If left empty, the default location will be loaded from the configuration file")
     
