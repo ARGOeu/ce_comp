@@ -34,7 +34,7 @@ def date_format(year, month, day):
     return year+"-"+month+"-"+conv_day
 
 
-def generate_Endpoints(data):
+def generate_endpoints(data):
     """ take the response JSON and return a dictionary of endpoints
     Example:
            { endpoint_name@group : {"availability" : x, "reliability": x} }
@@ -142,10 +142,10 @@ def main(args=None):
         devel_data = json.loads(devel_response.text)
 
         # all the production endpoints formated for the following calculations
-        prod_dict = generate_Endpoints(prod_data)
+        prod_dict = generate_endpoints(prod_data)
 
         # all the devel endpoints formated for the following calculations
-        devel_dict = generate_Endpoints(devel_data)
+        devel_dict = generate_endpoints(devel_data)
 
         # points found in either prod or devel but not in both
         missing_points = set(prod_dict.keys()) ^ set(devel_dict.keys())
