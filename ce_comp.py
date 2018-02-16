@@ -13,7 +13,8 @@ import pandas as pd
 def date_format(year, month, day):
     """ Date formater
     Example:
-          if the integer representing the day is above 9, we keep as it is, e.g. 10
+          if the integer representing the day is above 9,
+          we keep as it is, e.g. 10
           else we format it in the following way, e.g. 08
     Attributes:
               year(str): the year of the in use date
@@ -60,11 +61,18 @@ def generate_Endpoints(data):
 
 
 def endpoint_comparison(_dict, error, count):
-
-    """
-    for each endpoint, calculate the difference in
+    """ for each endpoint, calculate the difference in
     availability and reliability given the a/r for
     both engines (hadoop and flink)
+
+    Attributes:
+              _dict(dict):a dictionary representing an endpoint
+              error(float): total error for both availability and reliability
+              count(int): total computations performed
+    Returns:
+           (dict): updated representation for the respective  endpoint
+           (float): updated total error
+           (int): updated total count
     """
 
     if _dict["a_prod"] != -1 and _dict["a_devel"] != -1:
