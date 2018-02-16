@@ -9,11 +9,13 @@ ARGO serves availability/reliability results along with status timelines of the 
 
 | argument | Description |
 | --- | --- |
-| -s <Output format> | Report's file format. Right now it supports csv, with the default being json. |
+| -s <Output format> | Report's file format. Right now it supports csv and html, with the default being json. |
 | -t <Tenant> | Tenant. |
 | -c <Conf file> |  Path to the config file. |
 | -th <Threshold> | Threshold availability and reliability results by a minimum threshold. |
 | -sp <Save path> [Optional] | If not specified, the script will create a directory named **generated_reports** in the same directory with itself, and store the results there. |
+
+
 `to run the script execute the following command`
 `$ ./ce_comp.py -s csv -t TenantA -c conf.cfg -th 1 -sp ~/my/reports/out`
 
@@ -21,8 +23,9 @@ The report's file name will be: <tenant>@<date>_report.<output_format>
 e.g. TenantA@2018-02-15_report.csv
 
 ### Configuration file
+
 ```
- [TENANTA]
+[TENANTA]
 hadoop: https://web-api-devel.argo.grnet.gr/api/v2/results/reportA/SERVICEGROUPS?start_time={start_date}T00%3A00%3A00Z&end_time={start_date}T23%3A53%3A00Z
 
 flink: https://web-api-devel.argo.grnet.gr/api/v2/results/reportB/SERVICEGROUPS?start_time={start_date}T00%3A00%3A00Z&end_time={start_date}T23%3A53%3A00Z
@@ -60,7 +63,12 @@ For each endpoint, it shows the site it belogs to, the availability and reliabil
 Also during execution the script prints results in the command line regarding which points were missing from either, The Compute Engine(hadoop based) or the Argo Streaming Engine(flink based), the average error and the thresholded endpoints sorted in descednding order.
 
 #### Prequisites
+
+**Navigate inside the cloned directory**
+
 `$ pip install -r requirements.txt`
+`mv conf.template conf.cfg`
+**Note:** After generating conf.cfg, you need to manually edit it and add the information you need for your computations.
 
 #### Testing
 Inside the script's directory you can run the `$ pytest` command.
