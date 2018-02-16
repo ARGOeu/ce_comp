@@ -1,6 +1,6 @@
 import json
 from ce_comp import date_format
-from ce_comp import generate_Endpoints
+from ce_comp import generate_endpoints
 from ce_comp import endpoint_comparison
 
 test_str = """
@@ -35,7 +35,7 @@ test_str = """
 
 class TestClass(object):
 
-    def test__date_format(self):
+    def test_date_format(self):
 
         assert "2018-02-07" == date_format("2018", "02", 7)
         assert "2018-02-17" == date_format("2018", "02", 17)
@@ -49,7 +49,7 @@ class TestClass(object):
         _dict = {}
         _dict["GR-01-AUTH@NGI_GRNET"] = _dict1
 
-        assert _dict == generate_Endpoints(json.loads(test_str))
+        assert _dict == generate_endpoints(json.loads(test_str))
 
     def test_endpoint_comparison(self):
 
