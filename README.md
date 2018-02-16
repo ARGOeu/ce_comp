@@ -14,9 +14,11 @@ ARGO serves availability/reliability results along with status timelines of the 
 | -c <Conf file> |  Path to the config file. |
 | -th <Threshold> | Threshold availability and reliability results by a minimum threshold. |
 | -sp <Save path> [Optional] | If not specified, the script will create a directory named **generated_reports** in the same directory with itself, and store the results there. |
+`to run the script execute the following command`
+`$ ./ce_comp.py -s csv -t TenantA -c conf.cfg -th 1 -sp ~/my/reports/out`
 
 The report's file name will be: <tenant>@<date>_report.<output_format>
-e.g. TENANTA@2018-02-15_report.csv
+e.g. TenantA@2018-02-15_report.csv
 
 ### Configuration file
 ```
@@ -55,14 +57,13 @@ e.g. The first row of the report for the  TENANTA.
 For each endpoint, it shows the site it belogs to, the availability and reliability metrics coming from production and devel respectively. At the end it shows the calculated differences.
 **Note:** If the availability or reliability metric for the day is -1, meaning that the owner stated scheduled downtime, it produced a non applicable value.
 
-Also during execution the script prints results in the command line regarding which points were missing from either compute engine, the average error and the thresholded endpoints sorted in descednding order.
+Also during execution the script prints results in the command line regarding which points were missing from either, The Compute Engine(hadoop based) or the Argo Streaming Engine(flink based), the average error and the thresholded endpoints sorted in descednding order.
 
-#### Dependencies needed for the script
-`$ pip install requests pandas termcolor prettytable pytest`
+#### Prequisites
+`$ pip install -r requirements.txt`
 
 #### Testing
 Inside the script's directory you can run the `$ pytest` command.
-
 
 
 
