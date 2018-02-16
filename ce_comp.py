@@ -11,10 +11,16 @@ import pandas as pd
 
 
 def date_format(year, month, day):
-
-    """
-     if the integer representing the day is above 9, we keep as it is, e.g. 10
-     else we format it in the following way, e.g. 08
+    """ Date formater
+    Example:
+          if the integer representing the day is above 9, we keep as it is, e.g. 10
+          else we format it in the following way, e.g. 08
+    Attributes:
+              year(str): the year of the in use date
+              month(str): the month of the in use date
+              day(int): the day of the in use date
+    Returns:
+           str: the formated date to be used in the next api request
     """
     
     if len(str(day)) == 2:
@@ -28,11 +34,13 @@ def date_format(year, month, day):
 
 
 def generate_Endpoints(data):
-
-    """
-    take the response JSON and return a dictionary of endpoints
-    in the following form
-    { endpoint_name@Tenant : {"availability" : x, "reliability": x} }
+    """ take the response JSON and return a dictionary of endpoints
+    Example:
+           { endpoint_name@group : {"availability" : x, "reliability": x} }
+    Attributes:
+              data(dict): the api response
+    Returns:
+           (dict): endpoints converted to an easily manipulated form
     """
     
     _endpoints = {}
