@@ -1,4 +1,5 @@
 import json
+import unittest
 from ce_comp import date_format
 from ce_comp import generate_endpoints
 from ce_comp import endpoint_comparison
@@ -33,12 +34,12 @@ test_str = """
 """
 
 
-class TestClass(object):
+class TestClass(unittest.TestCase):
 
     def test_date_format(self):
 
-        assert "2018-02-07" == date_format("2018", "02", 7)
-        assert "2018-02-17" == date_format("2018", "02", 17)
+        self.assertEqual("2018-02-07", date_format("2018", "02", 7))
+        self.assertEqual("2018-02-17", date_format("2018", "02", 17))
         
     def test_endpoint_generation(self):
 
@@ -49,7 +50,7 @@ class TestClass(object):
         _dict = {}
         _dict["GR-01-AUTH@NGI_GRNET"] = _dict1
 
-        assert _dict == generate_endpoints(json.loads(test_str))
+        self.assertEqual(_dict, generate_endpoints(json.loads(test_str)))
 
     def test_endpoint_comparison(self):
 
@@ -73,5 +74,5 @@ class TestClass(object):
         _dict_t["d_a"] = float("2")
         _dict_t["d_r"] = "na"
 
-        assert (_dict_t, 2.0, 1) == endpoint_comparison(_dict, error, count)
+        self.assertEqual((_dict_t, 2.0, 1), endpoint_comparison(_dict, error, count))
         
