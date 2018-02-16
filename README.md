@@ -6,6 +6,7 @@ ARGO serves availability/reliability results along with status timelines of the 
 
 ## How to use
 `ce_compy.py -s <Output format> -t <Tenant> -c <Conf file> -th <Threshold> -sp <Report's save path>[Optional]`
+
 | argument | Description |
 | --- | --- |
 | -s <Output format> | Report's file format. Right now it supports csv, with the default being json. |
@@ -13,6 +14,7 @@ ARGO serves availability/reliability results along with status timelines of the 
 | -c <Conf file> |  Path to the config file. |
 | -th <Threshold> | Threshold availability and reliability results by a minimum threshold. |
 | -sp <Save path> [Optional] | If not specified, the script will create a directory named **generated_reports** in the same directory with itself, and store the results there. |
+
 The report's file name will be: <tenant>@<date>_report.<output_format>
 e.g. TENANTA@2018-02-15_report.csv
 
@@ -45,6 +47,7 @@ path: ./generated_reports/
 #### Results
 The report produced by the script contains information about each site found under a group that belogs to the specified tenant.
 e.g. The first row of the report for the  TENANTA.
+
 | Endpoint | A_prod | A_devel | R_prod | R_devel | D_a | D_r |
 | --- | --- | --- | --- | --- | --- | -- |
 |siteA@groupA|100|98|95|-1|2|na|
