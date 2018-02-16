@@ -166,7 +166,7 @@ def main(args=None):
         thresholded_points_by_dr = {}
 
         # initialize dataframe
-        if output_format == "csv":
+        if output_format == "csv" or output_format == "html":
             df = pd.DataFrame([], columns=["Endpoint",
                                            "A_prod",
                                            "A_devel",
@@ -197,7 +197,7 @@ def main(args=None):
                 if _dict["d_r"] != "na" and _dict["d_r"] >= threshold:
                     thresholded_points_by_dr[key] = _dict["d_r"]
 
-                if output_format == "csv":
+                if output_format == "csv" or output_format == "html":
                     _df = pd.DataFrame([[key,
                                          _dict["a_prod"],
                                          _dict["a_devel"],
@@ -224,6 +224,8 @@ def main(args=None):
 
         if output_format == "csv":
             df.to_csv(save_path+tenant+"@"+date+"_report.csv", index=False, sep=",")
+        elif output_format == "html":
+            df.to_html(save_path+tenant+"@"+date+"_report.html", index=False)
         else:
             with open(save_path+tenant+"@"+date+"_report.json", "w") as fw:
                 json.dump(endpoint_error_stats, fw)
