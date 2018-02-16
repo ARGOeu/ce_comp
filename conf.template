@@ -1,0 +1,20 @@
+[TenantA]
+hadoop: https://web-api-devel.argo.grnet.gr/api/v2/results/Critical/groupA?start_time={start_date}T00%3A00%3A00Z&end_time={start_date}T23%3A53%3A00Z
+
+flink: https://web-api-devel.argo.grnet.gr/api/v2/results/CriticalTest/groupB?start_time={start_date}T00%3A00%3A00Z&end_time={start_date}T23%3A53%3A00Z
+
+token: *********************
+
+[TenantB]
+hadoop: https://web-api-devel.argo.grnet.gr/api/v2/results/Critical/groupA?start_time={start_date}T00%3A00%3A00Z&end_time={start_date}T23%3A53%3A00Z
+
+flink: https://web-api-devel.argo.grnet.gr/api/v2/results/NGIHRTest/groupB?start_time={start_date}T00%3A00%3A00Z&end_time={start_date}T23%3A53%3A00Z
+
+token: *********************
+
+[PERIOD]
+start_date: 2018-02-01
+end_date: 2018-02-12
+
+[SaveLocation]
+path: ./generated_reports/
