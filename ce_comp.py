@@ -88,12 +88,15 @@ def main(args=None):
 
     threshold = args.Threshold
 
-    output_format = args.OutputFormat
-
     config_path = args.ConfigPath
 
     config = ConfigParser.ConfigParser()
     config.read(config_path)
+
+    if args.OutputFormat is None:
+        output_format = "json"
+    else:
+        output_format = args.OutputFormat
 
     if args.SavePath is None:
         save_path = config.get("SaveLocation", "path")
