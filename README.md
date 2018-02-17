@@ -17,6 +17,8 @@ ARGO serves availability/reliability results along with status timelines of the 
 
 
 **to run the script execute the following command**
+
+
 `$ ./ce_comp.py -s csv -t TenantA -c conf.cfg -th 1 -sp ~/my/reports/out`
 
 The report's file name will be: <tenant>@<date>_report.<output_format>
@@ -68,7 +70,7 @@ Also during execution the script prints results in the command line regarding wh
 
 ```shell
 $ pip install -r requirements.txt
-mv conf.template conf.cfg
+$ mv conf.template conf.cfg
 ```
 **Note:** After generating conf.cfg, you need to manually edit it and add the information you need for your computations.
 
