@@ -51,7 +51,7 @@ path: ./generated_reports/
  - Each tenant is described by two urls,one for each infrastructure respectively, and a token, in order to access its data and compare.
  - The script supports functionality to calculate results for a period of time in a single execution. All of the results will be saved into the **[SaveLocation]** described by the tenant and the day.
 
-#### Results
+### Results
 The report produced by the script contains information about each site found under a group that belogs to the specified tenant.
 e.g. The first row of the report for the  TENANTA.
 
@@ -64,7 +64,7 @@ For each endpoint, it shows the site it belogs to, the availability and reliabil
 
 Also during execution the script prints results in the command line regarding which points were missing from either, The Compute Engine(hadoop based) or the Argo Streaming Engine(flink based), the average error and the thresholded endpoints sorted in descednding order.
 
-#### Prequisites
+### Prequisites
 
 **Navigate to the cloned directory**
 
@@ -74,7 +74,7 @@ $ mv conf.template conf.cfg
 ```
 **Note:** After generating conf.cfg, you need to manually edit it and add the information you need for your computations.
 
-#### Testing
+### Testing
 Inside the script's directory you can run the `$ pytest` command.
 
 

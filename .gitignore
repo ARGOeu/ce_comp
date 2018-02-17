@@ -4,3 +4,4 @@ __pycache__
 generated_reports
 .DS_STORE
 conf.cfg
+.pytest_cache
