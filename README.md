@@ -16,7 +16,7 @@ ARGO serves availability/reliability results along with status timelines of the 
 | -sp <Save path> [Optional] | If not specified, the script will create a directory named **generated_reports** in the same directory with itself, and store the results there. |
 
 
-`to run the script execute the following command`
+**to run the script execute the following command**
 `$ ./ce_comp.py -s csv -t TenantA -c conf.cfg -th 1 -sp ~/my/reports/out`
 
 The report's file name will be: <tenant>@<date>_report.<output_format>
@@ -64,19 +64,16 @@ Also during execution the script prints results in the command line regarding wh
 
 #### Prequisites
 
-**Navigate inside the cloned directory**
+**Navigate to the cloned directory**
 
-`$ pip install -r requirements.txt`
-`mv conf.template conf.cfg`
+```shell
+$ pip install -r requirements.txt
+mv conf.template conf.cfg
+```
 **Note:** After generating conf.cfg, you need to manually edit it and add the information you need for your computations.
 
 #### Testing
 Inside the script's directory you can run the `$ pytest` command.
-
-
-
-
-
 
 
 
