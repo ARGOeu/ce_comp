@@ -18,7 +18,6 @@ ARGO serves availability/reliability results along with status timelines of the 
 
 **to run the script execute the following command**
 
-
 `$ ./ce_comp.py -s csv -t TenantA -c conf.cfg -th 1 -sp ~/my/reports/out`
 
 The report's file name will be: <tenant>@<date>_report.<output_format>
