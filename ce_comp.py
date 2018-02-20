@@ -293,7 +293,7 @@ if __name__ == '__main__':
     parser.add_argument(
         "-sd", "--StartDate", type=str, help="Starting date")
     parser.add_argument(
-        "-ed", "--EndDate", type=str, help= "End date")
+        "-ed", "--EndDate", type=str, help="End date")
     
     # Parse arguments and pass them to main
     sys.exit(main(parser.parse_args()))
