@@ -118,10 +118,18 @@ def main(args=None):
 
     if not os.path.exists(os.path.dirname(save_path)):
         os.makedirs(os.path.dirname(save_path))
-    
-    year, month, start_date_day = config.get("PERIOD", "start_date").split("-")
-    end_date_day = config.get("PERIOD", "end_date").split("-")[2]
 
+    # check if the user has given start and end date, otherwise load them from conf file
+
+    if args.StartDate is None:
+        year, month, start_date_day = config.get("PERIOD", "start_date").split("-")
+    else:
+        year, month, start_date_day = args.StartDate.split("-")
+
+    if args.EndDate is None:
+        end_date_day = config.get("PERIOD", "end_date").split("-")[2]
+    else:
+        end_date_day = args.EndDate.split("-")[2]
     # loop through the range of days
     # use +1 since range function excludes last element
     for day in range(int(start_date_day), int(end_date_day)+1):
@@ -282,6 +290,10 @@ if __name__ == '__main__':
         "-th", "--Threshold", type=float, default=1.0, help="Threshold")
     parser.add_argument(
         "-sp", "--SavePath", type=str, help="Save path for the generated report. If left empty, the default location will be loaded from the configuration file")
+    parser.add_argument(
+        "-sd", "--StartDate", type=str, help="Starting date")
+    parser.add_argument(
+        "-ed", "--EndDate", type=str, help= "End date")
     
     # Parse arguments and pass them to main
     sys.exit(main(parser.parse_args()))

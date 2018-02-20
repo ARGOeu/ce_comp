@@ -5,7 +5,7 @@ An automatic mechanism to gather and compare results between Hadoop and Flink in
 ARGO serves availability/reliability results along with status timelines of the monitored elements (sites, services, endpoints, endpoint metrics). The current stable infrastructure is using Hadoop to compute availability and reliability and status results. Computation logic has been transferred to Flink also (currently running in a devel Flink cluster) and soon to be deployed in a Flink production cluster. It is essential for the switch to have a mechanism to compare results between the legacy and the new infrastructure.
 
 ## How to use
-`ce_compy.py -s <Output format> -t <Tenant> -c <Conf file> -th <Threshold> -sp <Report's save path>[Optional]`
+`ce_compy.py -s <Output format> -t <Tenant> -c <Conf file> -th <Threshold> -sp <Report's save path>[Optional] -sd <StartDate>[Optional] -ed <EndDate>[Optional]`
 
 | argument | Description |
 | --- | --- |
@@ -14,11 +14,12 @@ ARGO serves availability/reliability results along with status timelines of the 
 | -c <Conf file> |  Path to the config file. |
 | -th <Threshold> | Threshold availability and reliability results by a minimum threshold. |
 | -sp <Save path> [Optional] | If not specified, the script will create a directory named **generated_reports** in the same directory with itself, and store the results there. |
-
+| -sd <StartingDate>[Optional] | If not specified the script will load the starting date from the conf file. |
+| -ed <EndDate>[Optional] | If not specified the script will load the end date from the conf file. |
 
 **to run the script execute the following command**
 
-`$ ./ce_comp.py -s csv -t TenantA -c conf.cfg -th 1 -sp ~/my/reports/out`
+`$ ./ce_comp.py -s csv -t TenantA -c conf.cfg -th 1 -sp ~/my/reports/out -sd 2018-02-01 -ed 2018-02-10`
 
 The report's file name will be: <tenant>@<date>_report.<output_format>
 e.g. TenantA@2018-02-15_report.csv
