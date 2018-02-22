@@ -27,6 +27,9 @@ e.g. TenantA@2018-02-15_report.csv
 ### Configuration file
 
 ```
+[LOGS]
+handler_path:
+
 [TENANTA]
 hadoop: https://web-api-devel.argo.grnet.gr/api/v2/results/reportA/SERVICEGROUPS?start_time={start_date}T00%3A00%3A00Z&end_time={start_date}T23%3A53%3A00Z
 
