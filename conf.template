@@ -3,18 +3,22 @@ handler_path:
 level:
 
 [TenantA]
-hadoop: https://web-api-devel.argo.grnet.gr/api/v2/results/Critical/groupA?start_time={start_date}T00%3A00%3A00Z&end_time={start_date}T23%3A53%3A00Z
+hadoop: infra_url
 
-flink: https://web-api-devel.argo.grnet.gr/api/v2/results/CriticalTest/groupB?start_time={start_date}T00%3A00%3A00Z&end_time={start_date}T23%3A53%3A00Z
+flink: infra_url
 
-token: *********************
+hadoop_token: *********************
+
+flink_token: *********************
 
 [TenantB]
-hadoop: https://web-api-devel.argo.grnet.gr/api/v2/results/Critical/groupA?start_time={start_date}T00%3A00%3A00Z&end_time={start_date}T23%3A53%3A00Z
+hadoop: infra_url
 
-flink: https://web-api-devel.argo.grnet.gr/api/v2/results/NGIHRTest/groupB?start_time={start_date}T00%3A00%3A00Z&end_time={start_date}T23%3A53%3A00Z
+flink: infra_url
 
-token: *********************
+hadoop_token: *********************
+
+flink_token: *********************
 
 [PERIOD]
 start_date: 2018-02-01
