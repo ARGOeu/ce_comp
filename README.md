@@ -5,7 +5,7 @@ An automatic mechanism to gather and compare results between Hadoop and Flink in
 ARGO serves availability/reliability results along with status timelines of the monitored elements (sites, services, endpoints, endpoint metrics). The current stable infrastructure is using Hadoop to compute availability and reliability and status results. Computation logic has been transferred to Flink also (currently running in a devel Flink cluster) and soon to be deployed in a Flink production cluster. It is essential for the switch to have a mechanism to compare results between the legacy and the new infrastructure.
 
 ## How to use
-`ce_compy.py -s <Output format> -t <Tenant> -c <Conf file> -th <Threshold> -sp <Report's save path>[Optional] -sd <StartDate>[Optional] -ed <EndDate>[Optional]`
+`ce_compy.py -s <Output format> -t <Tenant> -c <Conf file> -th <Threshold> -sp <Report's save path>[Optional] -sd <StartDate>[Optional] -ed <EndDate>[Optional] -v`
 
 | argument | Description |
 | --- | --- |
@@ -16,6 +16,7 @@ ARGO serves availability/reliability results along with status timelines of the 
 | -sp <Save path> [Optional] | If not specified, the script will create a directory named **generated_reports** in the same directory with itself, and store the results there. |
 | -sd <StartingDate>[Optional] | If not specified the script will load the starting date from the conf file. |
 | -ed <EndDate>[Optional] | If not specified the script will load the end date from the conf file. |
+| -v <Verify> | Run the script ignoring  unverified certficates on the infrastructurres. |
 
 **to run the script execute the following command**
 
@@ -29,29 +30,34 @@ e.g. TenantA@2018-02-15_report.csv
 ```
 [LOGS]
 handler_path:
+level:
 
-[TENANTA]
-hadoop: https://web-api-devel.argo.grnet.gr/api/v2/results/reportA/SERVICEGROUPS?start_time={start_date}T00%3A00%3A00Z&end_time={start_date}T23%3A53%3A00Z
+[TenantA]
+hadoop: infra_url
 
-flink: https://web-api-devel.argo.grnet.gr/api/v2/results/reportB/SERVICEGROUPS?start_time={start_date}T00%3A00%3A00Z&end_time={start_date}T23%3A53%3A00Z
+flink: infra_url
 
-token: *********************
+hadoop_token: *********************
 
-[TENANTB]
-hadoop: https://web-api-devel.argo.grnet.gr/api/v2/results/reportA/SITES?start_time={start_date}T00%3A00%3A00Z&end_time={start_date}T23%3A53%3A00Z
+flink_token: *********************
 
-flink: https://web-api-devel.argo.grnet.gr/api/v2/results/reportB/SITES?start_time={start_date}T00%3A00%3A00Z&end_time={start_date}T23%3A53%3A00Z
+[TenantB]
+hadoop: infra_url
 
-token: ***********************
+flink: infra_url
+
+hadoop_token: *********************
+
+flink_token: *********************
 
 [PERIOD]
 start_date: 2018-02-01
 end_date: 2018-02-12
 
 [SaveLocation]
-path: ./generated_reports/ 
+path: ./generated_reports/
 ```
- - Each tenant is described by two urls,one for each infrastructure respectively, and a token, in order to access its data and compare.
+ - Each tenant is described by two urls,one for each infrastructure respectively, and two token, in order to access its data and compare.
  - The script supports functionality to calculate results for a period of time in a single execution. All of the results will be saved into the **[SaveLocation]** described by the tenant and the day.
 
 ### Results

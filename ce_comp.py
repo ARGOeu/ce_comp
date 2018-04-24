@@ -23,7 +23,7 @@ def print_and_log(level, message, logger):
     if level >= 30:
         print(message)
 
-        
+
 def date_format(year, month, day):
     """ Date formater
     Example:
@@ -142,6 +142,7 @@ def main(args=None):
     }
 
     log.setLevel(levels[log_level])
+
     sys_log = logging.handlers.SysLogHandler(config.get("LOGS", "handler_path"))
     sys_format = logging.Formatter('%(name)s[%(process)d]: %(levelname)s %(message)s')
     sys_log.setFormatter(sys_format)
@@ -184,14 +185,30 @@ def main(args=None):
 
         devel_url = config.get(tenant, "flink").strip().replace("{start_date}", date)
 
-        headers = {"accept": "application/json",
-                   "x-api-key": config.get(tenant, "token")}
+        prod_headers = {"accept": "application/json",
+                        "x-api-key": config.get(tenant, "hadoop_token")}
 
-        prod_response = requests.get(prod_url, headers=headers)
+        devel_headers = {"accept": "application/json",
+                         "x-api-key": config.get(tenant, "flink_token")}
+
+        prod_response = requests.get(prod_url, headers=prod_headers, verify=args.Verify)
         prod_data = json.loads(prod_response.text)
 
-        devel_response = requests.get(devel_url, headers=headers)
+        devel_response = requests.get(devel_url, headers=devel_headers, verify=args.Verify)
         devel_data = json.loads(devel_response.text)
+
+        # check if the both infrastructures responded normally
+        if prod_response.status_code != 200 and devel_response.status_code != 200:
+            print_and_log(logging.CRITICAL, "Could not access neither of the infrastructures.\nDevel response: " + devel_response.text + "\nProd response: " + prod_response.text, log)
+            sys.exit(1)
+
+        if prod_response.status_code != 200:
+            print_and_log(logging.CRITICAL, "Prod response: \n" + prod_response.text, log)
+            sys.exit(1)
+
+        if devel_response.status_code != 200:
+            print_and_log(logging.CRITICAL, "Devel response: \n" + devel_response.text, log)
+            sys.exit(1)
 
         if "results" in prod_data and "results" in devel_data:
 
@@ -327,10 +344,10 @@ def main(args=None):
             for point in sorted(thresholded_points_by_dr, key=thresholded_points_by_dr.get, reverse=True):
                 cprint(colored(point + " - " + str(thresholded_points_by_dr[point])+" "), "yellow", attrs=['bold'])
 
-        elif "results" in prod_data and "results" not in "devel_data":
+        elif "results" in prod_data and "results" not in devel_data:
             print_and_log(logging.CRITICAL, "Comparison could not run for date: " + date + "\nDevel infrastructure didn't produce any results", log)
             return_code = 1
-        elif "results" not in prod_data and "results" in "devel_data":
+        elif "results" not in prod_data and "results" in devel_data:
             print_and_log(logging.CRITICAL, "Comparison could not run for date: " + date + "\nProduction infrastructure didn't produce any results", log)
             return_code = 1
         else:
@@ -361,6 +378,8 @@ if __name__ == '__main__':
         "-sd", "--StartDate", type=str, help="Starting date")
     parser.add_argument(
         "-ed", "--EndDate", type=str, help="End date")
+    parser.add_argument(
+        "-v", "--Verify", help="Run the script ignoring  unverified certficates on the infrastructurres", action="store_false")
 
     # Parse arguments and pass them to main
     sys.exit(main(parser.parse_args()))
