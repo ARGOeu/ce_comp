@@ -200,15 +200,12 @@ def main(args=None):
         # check if the both infrastructures responded normally
         if prod_response.status_code != 200 and devel_response.status_code != 200:
             print_and_log(logging.CRITICAL, "Could not access neither of the infrastructures.\nDevel response: " + devel_response.text + "\nProd response: " + prod_response.text, log)
-            sys.exit(1)
 
         if prod_response.status_code != 200:
             print_and_log(logging.CRITICAL, "Prod response: \n" + prod_response.text, log)
-            sys.exit(1)
 
         if devel_response.status_code != 200:
             print_and_log(logging.CRITICAL, "Devel response: \n" + devel_response.text, log)
-            sys.exit(1)
 
         if "results" in prod_data and "results" in devel_data:
 
@@ -255,8 +252,6 @@ def main(args=None):
 
                 if key not in missing_points:
 
-                    print_and_log(logging.INFO, "Calculating results for key: " + key, log)
-
                     _dict["a_prod"] = float(prod_dict[key]["availability"])
                     _dict["a_devel"] = float(devel_dict[key]["availability"])
                     _dict["r_prod"] = float(prod_dict[key]["reliability"])
@@ -294,7 +289,8 @@ def main(args=None):
 
                     endpoint_error_stats[key] = _dict
 
-            #
+            df.sort_values(by=["D_a"], inplace=True)
+            
             error_count_tb = PrettyTable()
             error_count_tb.field_names = ["Error", "Endpoints", "Avg Error"]
             error_count_tb.add_row([error, count, error/count])
@@ -321,6 +317,19 @@ def main(args=None):
                 else:
                     missing_points_tb.add_row([point, "No", "Yes"])
                     print_and_log(logging.WARNING, key + " found in devel but not in production", log)
+
+            if output_format == "html":
+                fw = open(save_path+tenant+"@"+date+"_report.html", "a+")
+                fw.write("<br>")
+                fw.write("<hr>")
+                fw.write(missing_points_tb.get_html_string())
+                fw.write("<br>")
+                fw.write("<hr>")
+                fw.write(error_count_tb.get_html_string())
+            else:
+                fw = open(save_path+tenant+"@"+date+"_supplementary_report.txt", "w")
+                fw.write(missing_points_tb.get_string())
+                fw.write(error_count_tb.get_string())
 
             # terminal output for the calculated results
             print("\n########################################")
